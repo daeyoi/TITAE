@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         <activity
             android:name=".MainActivity"
@@ -26,6 +27,8 @@
         <activity android:name=".SearchResult"/>
 
 =======
+=======
+>>>>>>> a5efad5... search recyclerview 구현
         <activity android:name=".Search2Activity"></activity>
         <activity android:name=".SearchActivity" />
         <activity
@@ -39,6 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+>>>>>>> a5efad5... search recyclerview 구현
+=======
 >>>>>>> a5efad5... search recyclerview 구현
     </application>
 
