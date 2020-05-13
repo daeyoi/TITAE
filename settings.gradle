@@ -1,0 +1,2 @@
+rootProject.name='titae'
+include ':app'
