@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -14,19 +19,40 @@ public class SearchActivity extends AppCompatActivity {
     SearchRecyclerAdapter mAdapter = null ;
     ArrayList<SearchRecyclerItem> mList = new ArrayList<SearchRecyclerItem>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        Intent intent = getIntent();
+        SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
+        if(searchData == null)
+        {
+            Toast.makeText(getApplicationContext(), "Tq", Toast.LENGTH_LONG).show();
+        }
+
+        TextView tv1 = (TextView)findViewById(R.id.tv1);
+        TextView tv2 = (TextView)findViewById(R.id.tv2);
+        TextView tv3 = (TextView)findViewById(R.id.tv3);
+        TextView tv4 = (TextView)findViewById(R.id.tv4);
+        TextView tv5 = (TextView)findViewById(R.id.tv5);
+        TextView tv6 = (TextView)findViewById(R.id.tv6);
+
+        tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
+        tv2.setText("가입대상: " + searchData.getTarget() + "  ");
+        tv3.setText("적립방식: " + searchData.getCalMethod() + "  ");
+        tv4.setText("지역: " + searchData.getRegion() + "  ");
+        tv5.setText("적립금액: " + searchData.getAmount() + "  ");
+        tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
 
         mRecyclerView = findViewById(R.id.search_list) ;
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         mAdapter = new SearchRecyclerAdapter(mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-
 
         // 아이템 추가. 임시로 직접입력
         addItem("A은행",
@@ -40,6 +66,35 @@ public class SearchActivity extends AppCompatActivity {
         addItem("E은행",
                 "ㅁ상품", 2.77F) ;
 
+
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
+        addItem("D은행",
+                "ㄹ상품", 2.94F) ;
+        addItem("E은행",
+                "ㅁ상품", 2.77F) ;
         mAdapter.notifyDataSetChanged() ;
     }
 
@@ -54,4 +109,5 @@ public class SearchActivity extends AppCompatActivity {
 
         mList.add(item);
     }
+
 }

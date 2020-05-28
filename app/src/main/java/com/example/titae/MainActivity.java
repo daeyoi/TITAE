@@ -19,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button MTSbtn = (Button)findViewById(R.id.main_to_search_btn);
         MTSbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "to SearchActivity", Toast.LENGTH_LONG).show();
-                Intent myintent = new Intent(MainActivity.this, SearchActivity.class);
+                Toast.makeText(getApplicationContext(), "button click (to Search2Act)", Toast.LENGTH_LONG).show();
+                Intent myintent = new Intent(MainActivity.this, Search2Activity.class);
                 startActivity(myintent);
                 finish();
             }
