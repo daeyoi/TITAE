@@ -26,13 +26,15 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Intent intent = getIntent();
+        //intent 값 전달 받음
+       Intent intent = getIntent();
         SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
         if(searchData == null)
         {
             Toast.makeText(getApplicationContext(), "Tq", Toast.LENGTH_LONG).show();
         }
 
+        // 제대로 intent값이 받아졌는지 확인하는 부분 나중에 삭제
         TextView tv1 = (TextView)findViewById(R.id.tv1);
         TextView tv2 = (TextView)findViewById(R.id.tv2);
         TextView tv3 = (TextView)findViewById(R.id.tv3);
@@ -46,13 +48,20 @@ public class SearchActivity extends AppCompatActivity {
         tv4.setText("지역: " + searchData.getRegion() + "  ");
         tv5.setText("적립금액: " + searchData.getAmount() + "  ");
         tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
+        //
+
 
         mRecyclerView = findViewById(R.id.search_list) ;
-
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         mAdapter = new SearchRecyclerAdapter(mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
+
+
+        /**
+         * 이부분에서 쿼리를 받아와서 아이템 추가
+         * 아래 부분은 임시로 나중에 삭제
+         */
 
         // 아이템 추가. 임시로 직접입력
         addItem("A은행",
