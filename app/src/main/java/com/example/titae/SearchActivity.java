@@ -17,7 +17,9 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final String TAG_Productname = "productname";
     private static final String TAG_Rate = "rate";
     private static final String TAG_Description = "description";
+    String sql_msg ;
     JSONArray products = null;
     String mJsonString;
 
@@ -76,10 +79,11 @@ public class SearchActivity extends AppCompatActivity {
 
 
         Log.d("main","start");
+        sql_msg = "sql_msg=select * from titae.deposit"; //쿼리문 전달
 
-
+        String myIP = "192.168.0.8";
         getData asyncgetData = new getData();
-        asyncgetData.execute("http://192.168.0.8/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨
+        asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
         Log.d("main","start3");
     }
 
@@ -132,7 +136,6 @@ public class SearchActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             mJsonString = result;
-            //Log.d("mjson",mJsonString);
             MakeItemList();
 
 
@@ -141,26 +144,37 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String url_server = params[0];
-            String sql ="select * from deposit,savings";
             BufferedReader br = null;
 
             Log.d("url",url_server);
-
 
             try {
 
                 URL url = new URL(url_server);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
-
+                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 con.setRequestMethod("POST");
-                Log.d("try","error1");
+                con.setDoOutput(true); // 서버로 쓰기 모드 지정
+                con.connect();
+
+
+                //php서버로 데이터 전송
+                OutputStream outs =con.getOutputStream();
+                outs.write(sql_msg.getBytes("UTF-8"));
+                outs.flush();
+                outs.close();
+
                 StringBuilder sb = new StringBuilder();
                 br= new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String json;
-                Log.d("try","error2");
+
+
                 while ((json = br.readLine()) != null) {
                     sb.append(json + "\n");
                 }
+
+
+
                 Log.d("try","error3");
                 return sb.toString().trim();
             } catch (Exception e) {
