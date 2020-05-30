@@ -4,9 +4,11 @@ error_reporting(E_ALL);
 ini_set('display_errors',1); 
 
 include('dbcon.php');
-        
 
-    $stmt = $con->prepare('select * from titae.ProductInfo'); 
+
+    $msg = $_POST['sql_msg']; //안드로이드에서 보낸 데이터 
+
+    $stmt = $con->prepare($msg); 
     $stmt->execute();
 
     if ($stmt->rowCount() > 0)
@@ -18,10 +20,10 @@ include('dbcon.php');
             extract($row);
     
             array_push($data, 
-                array('Bank_name'=>$Bank_name,
-                'Product_name'=>$Product_name,
-                'Rate'=>$Rate,
-                'Description'=>$Description
+                array('bankname'=>$bankname,
+                'productname'=>$productname,
+                'rate'=>$rate,
+                'description'=>$Description
             ));
         }
 

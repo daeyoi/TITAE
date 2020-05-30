@@ -2,8 +2,8 @@
 
 $host='localhost';
 $user='root';
-$pw='1234';
-$dbName='titae';
+$pw='1234';//password
+$dbName='titae';//database name
 
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
     
@@ -11,6 +11,8 @@ $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
 
       $con = new PDO("mysql:host={$host};dbName={$dbName};charset=utf8",$user, $pw);
+
+     
       /*
         if($con)
         	echo "db";
@@ -44,5 +46,6 @@ $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
     
  
     header('Content-Type: text/html; charset=utf-8'); 
-    #session_start();
+
+
 ?>
