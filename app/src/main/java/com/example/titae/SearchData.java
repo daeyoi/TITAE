@@ -12,6 +12,7 @@ public class SearchData implements Serializable {
     public String target;
     public String calMethod;  //적립 방식
     public String region;
+    public String reservingMethod;
     public int amount;
     public int period;
 
@@ -29,6 +30,10 @@ public class SearchData implements Serializable {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public void setReservingMethod(String reservingMethod) {
+        this.reservingMethod = reservingMethod;
     }
 
     public void setAmount(int amount) {
@@ -53,6 +58,10 @@ public class SearchData implements Serializable {
 
     public String getRegion() {
         return region;
+    }
+
+    public String getReservingMethod() {
+        return reservingMethod;
     }
 
     public int getAmount() {

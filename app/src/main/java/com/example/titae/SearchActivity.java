@@ -37,10 +37,9 @@ public class SearchActivity extends AppCompatActivity {
     private static final String TAG_Productname = "productname";
     private static final String TAG_Rate = "rate";
     private static final String TAG_Description = "description";
-    String sql_msg ;
+    String sql_msg;
     JSONArray products = null;
     String mJsonString;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
 
         tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
         tv2.setText("가입대상: " + searchData.getTarget() + "  ");
-        tv3.setText("적립방식: " + searchData.getCalMethod() + "  ");
+        tv3.setText("적립방식: " + searchData.getReservingMethod() + "  ");
         tv4.setText("지역: " + searchData.getRegion() + "  ");
         tv5.setText("적립금액: " + searchData.getAmount() + "  ");
         tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
@@ -76,18 +75,128 @@ public class SearchActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
 
-
-
         Log.d("main","start");
-        sql_msg = "sql_msg=select * from titae.deposit"; //쿼리문 전달
 
-        String myIP = "192.168.0.8";
+        if (searchData.getFinancialSphere().equals("all")){
+            if (searchData.getTarget().equals("all")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname";
+                }
+                else if (searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"정액적립식\"";
+                }
+                else if (searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"자유적립식\"";
+                }
+            }
+
+            else if (searchData.getTarget().equals("common")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\"";
+                }
+                else if(searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\"and reservingmethod=\"정액적립식\"";
+                }
+                else if(searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+
+            else if (searchData.getTarget().equals("limit")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"";
+                }
+                else if(searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"and reservingmethod=\"정액적립식\"";
+                }
+                else if(searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+        }
+
+        else if (searchData.getFinancialSphere().equals("first")){
+            if (searchData.getTarget().equals("all")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"";
+                }
+                else if (searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and reservingmethod=\"정액적립식\"";
+                }
+                else if (searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+
+            else if (searchData.getTarget().equals("common")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"서민전용\"";
+                }
+                else if(searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"서민전용\"and reservingmethod=\"정액적립식\"";
+                }
+                else if(searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"서민전용\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+
+            else if (searchData.getTarget().equals("limit")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"일부제한\"";
+                }
+                else if(searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"일부제한\"and reservingmethod=\"정액적립식\"";
+                }
+                else if(searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"일부제한\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+        }
+
+        else if (searchData.getFinancialSphere().equals("second")){
+            if (searchData.getTarget().equals("all")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"";
+                }
+                else if (searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\" and reservingmethod=\"정액적립식\"";
+                }
+                else if (searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\" and reservingmethod=\"자유적립식\"";
+                }
+            }
+
+            else if (searchData.getTarget().equals("common")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"서민전용\"";
+                }
+                else if(searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"서민전용\"and reservingmethod=\"정액적립식\"";
+                }
+                else if(searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"서민전용\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+
+            else if (searchData.getTarget().equals("limit")){
+                if (searchData.getReservingMethod().equals("all")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"일부제한\"";
+                }
+                else if(searchData.getReservingMethod().equals("reg")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"일부제한\"and reservingmethod=\"정액적립식\"";
+                }
+                else if(searchData.getReservingMethod().equals("rand")){
+                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"일부제한\"and reservingmethod=\"자유적립식\"";
+                }
+            }
+        }
+
+        String myIP = "172.30.1.53";
         getData asyncgetData = new getData();
         asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
         Log.d("main","start3");
+
     }
-
-
 
     public void addItem(String bankName, String productName, float rate) {
         SearchRecyclerItem item = new SearchRecyclerItem();
@@ -116,14 +225,12 @@ public class SearchActivity extends AppCompatActivity {
                 addItem(bankname,productname,rate);
 
             }
-
             mAdapter.notifyDataSetChanged() ;
         }catch(Exception e)
         {
             Log.d("makelist error","error");
         }
     }
-
 
     private class getData extends AsyncTask<String, Void, String> {
         @Override
@@ -137,7 +244,6 @@ public class SearchActivity extends AppCompatActivity {
 
             mJsonString = result;
             MakeItemList();
-
 
         }
 
@@ -157,7 +263,6 @@ public class SearchActivity extends AppCompatActivity {
                 con.setDoOutput(true); // 서버로 쓰기 모드 지정
                 con.connect();
 
-
                 //php서버로 데이터 전송
                 OutputStream outs =con.getOutputStream();
                 outs.write(sql_msg.getBytes("UTF-8"));
@@ -168,12 +273,9 @@ public class SearchActivity extends AppCompatActivity {
                 br= new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String json;
 
-
                 while ((json = br.readLine()) != null) {
                     sb.append(json + "\n");
                 }
-
-
 
                 Log.d("try","error3");
                 return sb.toString().trim();
