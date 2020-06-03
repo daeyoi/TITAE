@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +38,8 @@ public class Search2Activity extends AppCompatActivity {
     Button cre_btn;
     Button cra_btn;
 
-    Button region;
-    Button period;
+    Spinner region;
+    Spinner period;
     EditText amount;
 
     Button sub_btn;
@@ -59,8 +61,8 @@ public class Search2Activity extends AppCompatActivity {
         cre_btn = (Button) findViewById(R.id.calmethode_reg);
         cra_btn = (Button) findViewById(R.id.calmethode_rand);
 
-        region = (Button) findViewById(R.id.region);
-        period = (Button) findViewById(R.id.period);
+        region = (Spinner) findViewById(R.id.region);
+        period = (Spinner) findViewById(R.id.period);
         amount = (EditText) findViewById(R.id.amount);
 
         sub_btn = (Button) findViewById(R.id.submission);
@@ -75,25 +77,60 @@ public class Search2Activity extends AppCompatActivity {
         ta_btn.setBackgroundColor(0x969797);
         searchData.setCalMethod("all");
         ca_btn.setBackgroundColor(0x969797);
-        searchData.setPeriod(1);
+        searchData.setAmount(0);
 
         //수정해야하는 부분
-        searchData.setAmount(0);
+        searchData.setPeriod(1);
         searchData.setRegion("서울");
 
-        /*
-           다중 선택
-         */
-        region.setOnClickListener(new View.OnClickListener() {
+
+        //지역 선택 스피너 처리
+        region.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                region_popup();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                if(position == 0)
+                {
+                    //서울 일 때 경우
+                    searchData.setRegion("서울");
+                }
+                else if(position ==1)
+                {
+                    //경기일때
+                    searchData.setRegion("경기");
+                }
+                //기타 등등 처리
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-        period.setOnClickListener(new View.OnClickListener() {
+
+        //기간 선택 스피너 처리
+        period.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                period_popup();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                if(position == 0)
+                {
+                    //6개월 일 때 경우
+                    searchData.setPeriod(6);
+                }
+                else if(position ==1)
+                {
+                    //1년일 때
+                    searchData.setPeriod(12);
+                }
+                else if(position ==2)
+                {
+                    //2년일 때
+                    searchData.setPeriod(24);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -223,107 +260,109 @@ public class Search2Activity extends AppCompatActivity {
         }
     };
 
-    void region_popup() {
-        final List<String> ListItems = new ArrayList<>();
-        //차후 수정
-        ListItems.add("서울");
-        ListItems.add("강원");
-        ListItems.add("경기");
-        ListItems.add("충청");
-        ListItems.add("경상");
-        ListItems.add("전라");
-        ListItems.add("광역");
-        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
-
-        final List SelectedItems = new ArrayList();
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("지역 선택");
-        builder.setMultiChoiceItems(items, null,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        if (isChecked) {
-                            //사용자가 체크한 경우 리스트에 추가
-                            SelectedItems.add(which);
-                        } else if (SelectedItems.contains(which)) {
-                            //이미 리스트에 들어있던 아이템이면 제거
-                            SelectedItems.remove(Integer.valueOf(which));
-                        }
-                    }
-                });
-        builder.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        String msg = "";
-                        for (int i = 0; i < SelectedItems.size(); i++) {
-                            int index = (int) SelectedItems.get(i);
-
-                            msg = msg + "\n" + (i + 1) + " : " + ListItems.get(index);
-                        }
-                        Toast.makeText(getApplicationContext(),
-                                "Total " + SelectedItems.size() + " Items Selected.\n" + msg, Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
-        builder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        builder.show();
-    }
-
-    void period_popup() {
-        final List<String> ListItems = new ArrayList<>();
-        //차후 수정
-        ListItems.add("6개월");
-        ListItems.add("1년");
-        ListItems.add("2년");
-        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
-
-        final List SelectedItems = new ArrayList();
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("저축 기간 선택");
-        builder.setMultiChoiceItems(items, null,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        if (isChecked) {
-                            //사용자가 체크한 경우 리스트에 추가
-                            SelectedItems.add(which);
-                        } else if (SelectedItems.contains(which)) {
-                            //이미 리스트에 들어있던 아이템이면 제거
-                            SelectedItems.remove(Integer.valueOf(which));
-                        }
-                    }
-                });
-        builder.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        String msg = "";
-                        for (int i = 0; i < SelectedItems.size(); i++) {
-                            int index = (int) SelectedItems.get(i);
-
-                            msg = msg + "\n" + (i + 1) + " : " + ListItems.get(index);
-                        }
-                        Toast.makeText(getApplicationContext(),
-                                "Total " + SelectedItems.size() + " Items Selected.\n" + msg, Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
-        builder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        builder.show();
-    }
+//    void region_popup() {
+//        final List<String> ListItems = new ArrayList<>();
+//        //차후 수정
+//        ListItems.add("서울");
+//        ListItems.add("강원");
+//        ListItems.add("경기");
+//        ListItems.add("충청");
+//        ListItems.add("경상");
+//        ListItems.add("전라");
+//        ListItems.add("광역");
+//        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
+//
+//        final List SelectedItems = new ArrayList();
+//
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("지역 선택");
+//        builder.setMultiChoiceItems(items, null,
+//                new DialogInterface.OnMultiChoiceClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which,
+//                                        boolean isChecked) {
+//                        if (isChecked) {
+//                            //사용자가 체크한 경우 리스트에 추가
+//                            SelectedItems.add(which);
+//                        } else if (SelectedItems.contains(which)) {
+//                            //이미 리스트에 들어있던 아이템이면 제거
+//                            SelectedItems.remove(Integer.valueOf(which));
+//                        }
+//                    }
+//                });
+//        builder.setPositiveButton("Ok",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String msg = "";
+//                        for (int i = 0; i < SelectedItems.size(); i++) {
+//                            int index = (int) SelectedItems.get(i);
+//
+//                            msg = msg + "\n" + (i + 1) + " : " + ListItems.get(index);
+//                        }
+//                        Toast.makeText(getApplicationContext(),
+//                                "Total " + SelectedItems.size() + " Items Selected.\n" + msg, Toast.LENGTH_LONG)
+//                                .show();
+//                    }
+//                });
+//        builder.setNegativeButton("Cancel",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//        builder.show();
+//    }
+//
+//    void period_popup() {
+//        final List<String> ListItems = new ArrayList<>();
+//        //차후 수정
+//        ListItems.add("6개월");
+//        ListItems.add("1년");
+//        ListItems.add("2년");
+//        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
+//
+//        final List SelectedItems = new ArrayList();
+//
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("저축 기간 선택");
+//        builder.setMultiChoiceItems(items, null,
+//                new DialogInterface.OnMultiChoiceClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which,
+//                                        boolean isChecked) {
+//                        if (isChecked) {
+//                            //사용자가 체크한 경우 리스트에 추가
+//                            SelectedItems.add(which);
+//                        } else if (SelectedItems.contains(which)) {
+//                            //이미 리스트에 들어있던 아이템이면 제거
+//                            SelectedItems.remove(Integer.valueOf(which));
+//                        }
+//                    }
+//                });
+//        builder.setPositiveButton("Ok",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String msg = "";
+//                        for (int i = 0; i < SelectedItems.size(); i++) {
+//                            int index = (int) SelectedItems.get(i);
+//
+//                            msg = msg + "\n" + (i + 1) + " : " + ListItems.get(index);
+//                        }
+//                        Toast.makeText(getApplicationContext(),
+//                                "Total " + SelectedItems.size() + " Items Selected.\n" + msg, Toast.LENGTH_LONG)
+//                                .show();
+//                    }
+//                });
+//        builder.setNegativeButton("Cancel",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//        builder.show();
+//    }
 }

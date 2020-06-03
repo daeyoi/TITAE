@@ -5,34 +5,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+public class CompareActivity extends AppCompatActivity {
     RecyclerView mRecyclerView = null ;
-    SearchRecyclerAdapter mAdapter = null ;
+    CompareRecyclerAdapter mAdapter = null ;
     ArrayList<SearchRecyclerItem> mList = new ArrayList<SearchRecyclerItem>();
 
     //ArrayList<SearchRecyclerItem> mDeposits = new ArrayList<SearchRecyclerItem>(); //변경
-   // ArrayList<SearchRecyclerItem> mSavings = new ArrayList<SearchRecyclerItem>();  // 변경
+    // ArrayList<SearchRecyclerItem> mSavings = new ArrayList<SearchRecyclerItem>();  // 변경
 
     private static final String TAG_RESULTS = "results";
     private static final String TAG_Bankname = "bankname";
@@ -43,63 +38,51 @@ public class SearchActivity extends AppCompatActivity {
     JSONArray products = null;
     String mJsonString;
 
-    Button tmp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        Log.d("main","start1");
-        Intent intent = getIntent();
-        SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
-        if(searchData == null)
-        {
-            Toast.makeText(getApplicationContext(), "Tq", Toast.LENGTH_LONG).show();
-        }
+        setContentView(R.layout.activity_compare);
+        Log.d("compare","start1");
+//        Intent intent = getIntent();
+//        SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
+//        if(searchData == null)
+//        {
+//            Toast.makeText(getApplicationContext(), "Tq", Toast.LENGTH_LONG).show();
+//        }
 
-        //잘 넘어왔는지 확인용 (임시)
-        TextView tv1 = (TextView)findViewById(R.id.tv1);
-        TextView tv2 = (TextView)findViewById(R.id.tv2);
-        TextView tv3 = (TextView)findViewById(R.id.tv3);
-        TextView tv4 = (TextView)findViewById(R.id.tv4);
-        TextView tv5 = (TextView)findViewById(R.id.tv5);
-        TextView tv6 = (TextView)findViewById(R.id.tv6);
+//        TextView tv1 = (TextView)findViewById(R.id.tv1);
+//        TextView tv2 = (TextView)findViewById(R.id.tv2);
+//        TextView tv3 = (TextView)findViewById(R.id.tv3);
+//        TextView tv4 = (TextView)findViewById(R.id.tv4);
+//        TextView tv5 = (TextView)findViewById(R.id.tv5);
+//        TextView tv6 = (TextView)findViewById(R.id.tv6);
+//
+//        tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
+//        tv2.setText("가입대상: " + searchData.getTarget() + "  ");
+//        tv3.setText("적립방식: " + searchData.getCalMethod() + "  ");
+//        tv4.setText("지역: " + searchData.getRegion() + "  ");
+//        tv5.setText("적립금액: " + searchData.getAmount() + "  ");
+//        tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
 
-        tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
-        tv2.setText("가입대상: " + searchData.getTarget() + "  ");
-        tv3.setText("적립방식: " + searchData.getCalMethod() + "  ");
-        tv4.setText("지역: " + searchData.getRegion() + "  ");
-        tv5.setText("적립금액: " + searchData.getAmount() + "  ");
-        tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
-
-        //상세 페이지 넘어가는 버튼(임시)
-        tmp = (Button)findViewById(R.id.tmp_result);
-        tmp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "button click (to ResultAct)", Toast.LENGTH_LONG).show();
-                Intent myintent = new Intent(SearchActivity.this, ResultActivity.class);
-                startActivity(myintent);
-            }
-        });
-
-        mRecyclerView = findViewById(R.id.search_list) ;
+        mRecyclerView = findViewById(R.id.compare_list) ;
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
 
-        mAdapter = new SearchRecyclerAdapter(mList) ;
+        mAdapter = new  CompareRecyclerAdapter(mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
 
-
+        addItem("임시1","임시 메뉴", 2.9F);
+        addItem("임시2","임시 메뉴", 2.9F);
+        addItem("임시3","임시 메뉴", 2.9F);
 
         Log.d("main","start");
-        sql_msg = "sql_msg=select * from titae.deposit"; //쿼리문 전달
-
-        String myIP = "192.168.0.8";
-        getData asyncgetData = new getData();
-        asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
-        Log.d("main","start3");
+//        sql_msg = "sql_msg=select * from titae.deposit"; //쿼리문 전달
+//
+//        String myIP = "192.168.0.8";
+//        SearchActivity.getData asyncgetData = new SearchActivity.getData();
+//        asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
+//        Log.d("main","start3");
     }
 
 
@@ -110,6 +93,7 @@ public class SearchActivity extends AppCompatActivity {
         item.setBankName(bankName);
         item.setProductName(productName);
         item.setRate(rate);
+        //item.setAmount(amount);
 
         mList.add(item);
     }
@@ -201,6 +185,4 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 }
-
-
 

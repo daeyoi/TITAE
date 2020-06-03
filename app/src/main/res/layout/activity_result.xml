@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Search2Activity">
+    tools:context=".ResultActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -23,127 +22,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/금융권역"
+            android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="금융권역" />
-
-        <LinearLayout
-            android:id="@+id/bank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bank_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="전체" />
-
-            <Button
-                android:id="@+id/bank_first"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="은행" />
-
-            <Button
-                android:id="@+id/bank_second"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="저축은행" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/가입대상"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="가입대상" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/target_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="제한없음" />
-
-            <Button
-                android:id="@+id/target_common"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="서민전용" />
-
-            <Button
-                android:id="@+id/target_limit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="일부제한" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/적립방식"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="적립방식" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/calmethode_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="전체" />
-
-            <Button
-                android:id="@+id/calmethode_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="정액적립식" />
-
-            <Button
-                android:id="@+id/calmethode_rand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#d6d7d7"
-                android:text="자유적립식" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/지역"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="지역" />
-
-        <Spinner
-            android:id="@+id/region"
-            android:entries="@array/region"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="지역선택"/>
+            android:text="세부 결과" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,53 +33,152 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/bank_name_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="월 저축 금액" />
+                android:text="금융회사" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/bank_name_result_output"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="저축 기간" />
-
+                android:text="TextView" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/product_name_result"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="상품명" />
+
+        <TextView
+            android:id="@+id/product_name_result_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/amount"
+            <TextView
+                android:id="@+id/rate_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:inputType="number"
-                android:text="0" />
+                android:text="이자율" />
 
-
-            <Spinner
-                android:id="@+id/period"
-                android:entries="@array/period"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/rate_result_output"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="저축 기간 선택"/>
-
+                android:text="TextView" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/submission"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="검색" />
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/target_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="가입대상" />
+
+            <TextView
+                android:id="@+id/target_result_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/reserving_method_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="적립방식" />
+
+            <TextView
+                android:id="@+id/reserving_method_result_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/received_amount_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="실수령액" />
+
+            <TextView
+                android:id="@+id/received_amount_result_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/interest_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="이자" />
+
+            <TextView
+                android:id="@+id/interest_result_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/etc_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="이곳은 기타 상세 정보 뜨는 란" />
+
+        <Button
+            android:id="@+id/btn_hompage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="홈페이지 바로가기" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
