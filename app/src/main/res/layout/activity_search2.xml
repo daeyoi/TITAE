@@ -108,7 +108,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/calmethode_all"
+                android:id="@+id/reservingmethod_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -116,7 +116,7 @@
                 android:text="전체" />
 
             <Button
-                android:id="@+id/calmethode_reg"
+                android:id="@+id/reservingmethod_reg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -124,7 +124,7 @@
                 android:text="정액적립식" />
 
             <Button
-                android:id="@+id/calmethode_rand"
+                android:id="@+id/reservingmethod_rand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

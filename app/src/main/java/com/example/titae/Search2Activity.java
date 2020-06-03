@@ -34,9 +34,9 @@ public class Search2Activity extends AppCompatActivity {
     Button tc_btn;
     Button tl_btn;
 
-    Button ca_btn;
-    Button cre_btn;
-    Button cra_btn;
+    Button ra_btn;
+    Button rre_btn;
+    Button rra_btn;
 
     Spinner region;
     Spinner period;
@@ -57,9 +57,9 @@ public class Search2Activity extends AppCompatActivity {
         tc_btn = (Button) findViewById(R.id.target_common);
         tl_btn = (Button) findViewById(R.id.target_limit);
 
-        ca_btn = (Button) findViewById(R.id.calmethode_all);
-        cre_btn = (Button) findViewById(R.id.calmethode_reg);
-        cra_btn = (Button) findViewById(R.id.calmethode_rand);
+        ra_btn = (Button) findViewById(R.id.reservingmethod_all);
+        rre_btn = (Button) findViewById(R.id.reservingmethod_reg);
+        rra_btn = (Button) findViewById(R.id.reservingmethod_rand);
 
         region = (Spinner) findViewById(R.id.region);
         period = (Spinner) findViewById(R.id.period);
@@ -75,8 +75,8 @@ public class Search2Activity extends AppCompatActivity {
         ba_btn.setBackgroundColor(0x969797);
         searchData.setTarget("all");
         ta_btn.setBackgroundColor(0x969797);
-        searchData.setCalMethod("all");
-        ca_btn.setBackgroundColor(0x969797);
+        searchData.setReservingmethod("all");
+        ra_btn.setBackgroundColor(0x969797);
         searchData.setAmount(0);
 
         //수정해야하는 부분
@@ -146,9 +146,9 @@ public class Search2Activity extends AppCompatActivity {
         tc_btn.setOnClickListener(btnOnClickListner);
         tl_btn.setOnClickListener(btnOnClickListner);
 
-        ca_btn.setOnClickListener(btnOnClickListner);
-        cra_btn.setOnClickListener(btnOnClickListner);
-        cre_btn.setOnClickListener(btnOnClickListner);
+        ra_btn.setOnClickListener(btnOnClickListner);
+        rra_btn.setOnClickListener(btnOnClickListner);
+        rre_btn.setOnClickListener(btnOnClickListner);
 
         amount.addTextChangedListener(textWatcher);
         /*
@@ -213,23 +213,23 @@ public class Search2Activity extends AppCompatActivity {
                     ta_btn.setBackgroundColor(0xd6d7d7);
                     break;
 
-                case R.id.calmethode_all:
-                    searchData.setCalMethod("all");
-                    ca_btn.setBackgroundColor(0x969797);
-                    cra_btn.setBackgroundColor(0xd6d7d7);
-                    cre_btn.setBackgroundColor(0xd6d7d7);
+                case R.id.reservingmethod_all:
+                    searchData.setReservingmethod("all");
+                    ra_btn.setBackgroundColor(0x969797);
+                    rra_btn.setBackgroundColor(0xd6d7d7);
+                    rre_btn.setBackgroundColor(0xd6d7d7);
                     break;
-                case R.id.calmethode_rand:
-                    searchData.setCalMethod("rand");
-                    cra_btn.setBackgroundColor(0x969797);
-                    ca_btn.setBackgroundColor(0xd6d7d7);
-                    cre_btn.setBackgroundColor(0xd6d7d7);
+                case R.id.reservingmethod_reg:
+                    searchData.setReservingmethod("reg");
+                    rra_btn.setBackgroundColor(0x969797);
+                    ra_btn.setBackgroundColor(0xd6d7d7);
+                    rre_btn.setBackgroundColor(0xd6d7d7);
                     break;
-                case R.id.calmethode_reg:
-                    searchData.setCalMethod("rand");
-                    cre_btn.setBackgroundColor(0x969797);
-                    cra_btn.setBackgroundColor(0xd6d7d7);
-                    ca_btn.setBackgroundColor(0xd6d7d7);
+                case R.id.reservingmethod_rand:
+                    searchData.setReservingmethod("rand");
+                    rre_btn.setBackgroundColor(0x969797);
+                    rra_btn.setBackgroundColor(0xd6d7d7);
+                    ra_btn.setBackgroundColor(0xd6d7d7);
                     break;
             }
         }

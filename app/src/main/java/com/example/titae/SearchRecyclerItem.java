@@ -14,7 +14,7 @@ public class SearchRecyclerItem {
     private String productName;
     private float rate;
     private String target;
-    private String reservingMethod;
+    private String reservingmethod;
     private String calMethod;
 
     public String getBankName() {
@@ -41,8 +41,8 @@ public class SearchRecyclerItem {
         return target;
     }
 
-    public String getReservingMethod() {
-        return reservingMethod;
+    public String getReservingmethod() {
+        return reservingmethod;
     }
 
     public String getCalMethod() {
@@ -73,8 +73,8 @@ public class SearchRecyclerItem {
         this.target = target;
     }
 
-    public void setReservingMethod(String reservingMethod) {
-        this.reservingMethod = reservingMethod;
+    public void setReservingmethod(String reservingmethod) {
+        this.reservingmethod = reservingmethod;
     }
 
     public void setCalMethod(String calMethod) {
