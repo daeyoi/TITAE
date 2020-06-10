@@ -93,6 +93,7 @@ public class SearchActivity extends AppCompatActivity {
 
         Log.d("main","start");
 
+
         if (searchData.getFinancialSphere().equals("all")){
             if (searchData.getTarget().equals("all")){
                 if (searchData.getReservingmethod().equals("all")){
@@ -212,7 +213,6 @@ public class SearchActivity extends AppCompatActivity {
         asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
         Log.d("main","start3");
     }
-
 
 
     public void addItem(String bankName, String productName, float rate) {
