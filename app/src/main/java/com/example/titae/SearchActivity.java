@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class SearchActivity extends AppCompatActivity {
     RecyclerView mRecyclerView = null ;
@@ -54,7 +58,7 @@ public class SearchActivity extends AppCompatActivity {
         SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
         if(searchData == null)
         {
-            Toast.makeText(getApplicationContext(), "Tq", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "intent error", Toast.LENGTH_LONG).show();
         }
 
         //잘 넘어왔는지 확인용 (임시)
@@ -72,26 +76,30 @@ public class SearchActivity extends AppCompatActivity {
         tv5.setText("적립금액: " + searchData.getAmount() + "  ");
         tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
 
-        //상세 페이지 넘어가는 버튼(임시)
-        tmp = (Button)findViewById(R.id.tmp_result);
-        tmp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "button click (to ResultAct)", Toast.LENGTH_LONG).show();
-                Intent myintent = new Intent(SearchActivity.this, ResultActivity.class);
-                startActivity(myintent);
-            }
-        });
+
+
+//        //상세 페이지 넘어가는 버튼(임시)
+//        tmp = (Button)findViewById(R.id.tmp_result);
+//        tmp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getApplicationContext(), "button click (to ResultAct)", Toast.LENGTH_LONG).show();
+//                Intent myintent = new Intent(SearchActivity.this, ResultActivity.class);
+//                startActivity(myintent);
+//            }
+//        });
 
         mRecyclerView = findViewById(R.id.search_list) ;
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
 
-        mAdapter = new SearchRecyclerAdapter(mList) ;
+        mAdapter = new SearchRecyclerAdapter(getApplicationContext(), mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
 
         Log.d("main","start");
+
+        //리사이클러 뷰 클릭 이벤트 : 상세 페이지 이동
 
 
         if (searchData.getFinancialSphere().equals("all")){
@@ -310,6 +318,7 @@ public class SearchActivity extends AppCompatActivity {
 
         }
     }
+
 
 }
 
