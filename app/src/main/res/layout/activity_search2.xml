@@ -133,6 +133,42 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/단복리"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="적립방식" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/calmethod_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#D6D7D7"
+                android:text="전체" />
+
+            <Button
+                android:id="@+id/calmethod_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#D6D7D7"
+                android:text="단리" />
+
+            <Button
+                android:id="@+id/calmethod_compound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#d6d7d7"
+                android:text="복리" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/지역"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

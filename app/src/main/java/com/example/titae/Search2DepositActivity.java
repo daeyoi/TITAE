@@ -50,7 +50,6 @@ public class Search2DepositActivity extends AppCompatActivity {
         cs_btn = (Button) findViewById(R.id.calmethod_simple);
         cc_btn = (Button) findViewById(R.id.calmethod_compound);
 
-
         region = (Spinner) findViewById(R.id.region);
 
         sub_btn = (Button) findViewById(R.id.submission);

@@ -38,6 +38,10 @@ public class Search2Activity extends AppCompatActivity {
     Button rre_btn;
     Button rra_btn;
 
+    Button ca_btn;
+    Button cs_btn;
+    Button cc_btn;
+
     Spinner region;
     Spinner period;
     EditText amount;
@@ -61,6 +65,10 @@ public class Search2Activity extends AppCompatActivity {
         rre_btn = (Button) findViewById(R.id.reservingmethod_reg);
         rra_btn = (Button) findViewById(R.id.reservingmethod_rand);
 
+        ca_btn = (Button) findViewById(R.id.calmethod_all);
+        cs_btn = (Button) findViewById(R.id.calmethod_simple);
+        cc_btn = (Button) findViewById(R.id.calmethod_compound);
+
         region = (Spinner) findViewById(R.id.region);
         period = (Spinner) findViewById(R.id.period);
         amount = (EditText) findViewById(R.id.amount);
@@ -77,6 +85,8 @@ public class Search2Activity extends AppCompatActivity {
         ta_btn.setBackgroundColor(0x969797);
         searchData.setReservingmethod("all");
         ra_btn.setBackgroundColor(0x969797);
+        searchData.setCalmethod("all");
+        ca_btn.setBackgroundColor(0x969797);
         searchData.setAmount(0);
 
         //수정해야하는 부분
@@ -231,12 +241,30 @@ public class Search2Activity extends AppCompatActivity {
                     rra_btn.setBackgroundColor(0xd6d7d7);
                     ra_btn.setBackgroundColor(0xd6d7d7);
                     break;
+                case R.id.calmethod_all:
+                    searchData.setCalmethod("all");
+                    ca_btn.setBackgroundColor(0x969797);
+                    cs_btn.setBackgroundColor(0xd6d7d7);
+                    cc_btn.setBackgroundColor(0xd6d7d7);
+                    break;
+                case R.id.calmethod_simple:
+                    searchData.setCalmethod("simple");
+                    cc_btn.setBackgroundColor(0x969797);
+                    ca_btn.setBackgroundColor(0xd6d7d7);
+                    cs_btn.setBackgroundColor(0xd6d7d7);
+                    break;
+                case R.id.calmethod_compound:
+                    searchData.setCalmethod("compound");
+                    cc_btn.setBackgroundColor(0x969797);
+                    cs_btn.setBackgroundColor(0xd6d7d7);
+                    ca_btn.setBackgroundColor(0xd6d7d7);
+                    break;
             }
         }
     }
 
     /*
-    값 변경
+    텍스트 값 변경 감지
      */
     TextWatcher textWatcher = new TextWatcher() {
         String num;
@@ -261,108 +289,4 @@ public class Search2Activity extends AppCompatActivity {
     };
 
 
-
-//    void region_popup() {
-//        final List<String> ListItems = new ArrayList<>();
-//        //차후 수정
-//        ListItems.add("서울");
-//        ListItems.add("강원");
-//        ListItems.add("경기");
-//        ListItems.add("충청");
-//        ListItems.add("경상");
-//        ListItems.add("전라");
-//        ListItems.add("광역");
-//        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
-//
-//        final List SelectedItems = new ArrayList();
-//
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("지역 선택");
-//        builder.setMultiChoiceItems(items, null,
-//                new DialogInterface.OnMultiChoiceClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which,
-//                                        boolean isChecked) {
-//                        if (isChecked) {
-//                            //사용자가 체크한 경우 리스트에 추가
-//                            SelectedItems.add(which);
-//                        } else if (SelectedItems.contains(which)) {
-//                            //이미 리스트에 들어있던 아이템이면 제거
-//                            SelectedItems.remove(Integer.valueOf(which));
-//                        }
-//                    }
-//                });
-//        builder.setPositiveButton("Ok",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        String msg = "";
-//                        for (int i = 0; i < SelectedItems.size(); i++) {
-//                            int index = (int) SelectedItems.get(i);
-//
-//                            msg = msg + "\n" + (i + 1) + " : " + ListItems.get(index);
-//                        }
-//                        Toast.makeText(getApplicationContext(),
-//                                "Total " + SelectedItems.size() + " Items Selected.\n" + msg, Toast.LENGTH_LONG)
-//                                .show();
-//                    }
-//                });
-//        builder.setNegativeButton("Cancel",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                });
-//        builder.show();
-//    }
-//
-//    void period_popup() {
-//        final List<String> ListItems = new ArrayList<>();
-//        //차후 수정
-//        ListItems.add("6개월");
-//        ListItems.add("1년");
-//        ListItems.add("2년");
-//        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
-//
-//        final List SelectedItems = new ArrayList();
-//
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("저축 기간 선택");
-//        builder.setMultiChoiceItems(items, null,
-//                new DialogInterface.OnMultiChoiceClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which,
-//                                        boolean isChecked) {
-//                        if (isChecked) {
-//                            //사용자가 체크한 경우 리스트에 추가
-//                            SelectedItems.add(which);
-//                        } else if (SelectedItems.contains(which)) {
-//                            //이미 리스트에 들어있던 아이템이면 제거
-//                            SelectedItems.remove(Integer.valueOf(which));
-//                        }
-//                    }
-//                });
-//        builder.setPositiveButton("Ok",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        String msg = "";
-//                        for (int i = 0; i < SelectedItems.size(); i++) {
-//                            int index = (int) SelectedItems.get(i);
-//
-//                            msg = msg + "\n" + (i + 1) + " : " + ListItems.get(index);
-//                        }
-//                        Toast.makeText(getApplicationContext(),
-//                                "Total " + SelectedItems.size() + " Items Selected.\n" + msg, Toast.LENGTH_LONG)
-//                                .show();
-//                    }
-//                });
-//        builder.setNegativeButton("Cancel",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                });
-//        builder.show();
-//    }
 }

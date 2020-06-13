@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CompareActivity"></activity>
+        <activity android:name=".CalcActivity"></activity>
+        <activity android:name=".CompareActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".Search2Activity" />
         <activity android:name=".SearchActivity" />

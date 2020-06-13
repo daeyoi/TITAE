@@ -46,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
                 select_compare_popup();
             }
         });
+
+        //계산기 버튼 클릭 시
+        MTCabtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "button click (to CalcAct)", Toast.LENGTH_LONG).show();
+                Intent myintent = new Intent(MainActivity.this, CalcActivity.class);
+                startActivity(myintent);
+            }
+        });
     }
 
     void select_search_popup() {
@@ -64,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "button click (to Search2Act)", Toast.LENGTH_LONG).show();
                 Intent myintent = new Intent(MainActivity.this, Search2Activity.class);
                 startActivity(myintent);
-//                finish();
             }
         });
 
@@ -76,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "button click (to Search2Act)", Toast.LENGTH_LONG).show();
                 Intent myintent = new Intent(MainActivity.this, Search2DepositActivity.class);
                 startActivity(myintent);
-//                finish();
             }
         });
 
@@ -93,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog dialog = builder.create();
 
-        //적금 버튼 처리
+        //적금 버튼 처리(비교)
         savings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "button click (to CompareAct)", Toast.LENGTH_LONG).show();
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //예금 버튼 처리(비교)
         deposit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "button click (to CompareAct)", Toast.LENGTH_LONG).show();
