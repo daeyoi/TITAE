@@ -1,5 +1,6 @@
 package com.example.titae;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,9 +15,8 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder> {
-    Context mContext;
     private ArrayList<SearchRecyclerItem> mData = null;
-
+    private Context mContext;
     // 생성자에서 데이터 리스트 객체를 전달받음.
     SearchRecyclerAdapter(Context mContext, ArrayList<SearchRecyclerItem> list) {
         mContext = mContext;
@@ -76,20 +76,22 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
                     if (pos != RecyclerView.NO_POSITION) {
                         //데이터 리스트로부터 아이템 데이터 참조
                         SearchRecyclerItem item = mData.get(pos);
-                        Toast.makeText(context, pos + "번쨰 아이템 클릭 / button click (to ResultAct)", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, pos + "번쨰 아이템 클릭 / button click (to ResultAct)" + item.getBankName(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(view.getContext(), ResultActivity.class);
 
                         //클릭위치 아이템 삽임
-                        intent.putExtra("bank_name",mData.get(pos).getBankName());
-                        intent.putExtra("financial_sphere",mData.get(pos).getFinancialSphere());
-                        intent.putExtra("rate",mData.get(pos).getRate());
-                        intent.putExtra("region",mData.get(pos).getRegion());
-                        intent.putExtra("product_name",mData.get(pos).getProductName());
-                        intent.putExtra("target",mData.get(pos).getTarget());
-                        intent.putExtra("reserving_method",mData.get(pos).getReservingmethod());
-                        intent.putExtra("cal_method",mData.get(pos).getCalMethod());
-                        mContext.startActivity(intent);
-                        notifyItemChanged(pos);
+                        intent.putExtra("bank_name",item.getBankName());
+//                        intent.putExtra("financial_sphere",mData.get(pos).getFinancialSphere());
+//                        intent.putExtra("rate",mData.get(pos).getRate());
+//                        intent.putExtra("region",mData.get(pos).getRegion());
+                        intent.putExtra("product_name",item.getProductName());
+//                        intent.putExtra("target",mData.get(pos).getTarget());
+//                        intent.putExtra("reserving_method",mData.get(pos).getReservingmethod());
+//                        intent.putExtra("cal_method",mData.get(pos).getCalMethod());
+
+
+                        view.getContext().startActivity(intent);
+//                        notifyItemChanged(pos);
                     }
                 }
             });

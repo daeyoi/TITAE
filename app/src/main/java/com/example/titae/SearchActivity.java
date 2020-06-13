@@ -96,10 +96,13 @@ public class SearchActivity extends AppCompatActivity {
         mAdapter = new SearchRecyclerAdapter(getApplicationContext(), mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-
+        addItem("은행1","뫄뫄아이템1",0.01F);
+        addItem("은행2","뫄뫄2",0.2F);
+        addItem("은행3","뫄뫄아이템5",0.03F);
+        addItem("은행4","뫄뫄4",0.4F);
         Log.d("main","start");
 
-        //리사이클러 뷰 클릭 이벤트 : 상세 페이지 이동
+        //리사이클러 뷰 클릭 이벤트 : 상세 페이지  이동
 
 
         if (searchData.getFinancialSphere().equals("all")){
@@ -216,7 +219,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
 
-        String myIP = "172.30.1.53";
+        String myIP = "192.168.56.1";
         getData asyncgetData = new getData();
         asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
         Log.d("main","start3");
