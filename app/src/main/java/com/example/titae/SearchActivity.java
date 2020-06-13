@@ -43,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final String TAG_Productname = "productname";
     private static final String TAG_Rate = "rate";
     private static final String TAG_Description = "description";
+    private static final String TAG_Calmethod = "calmethod";
     String sql_msg ;
     JSONArray products = null;
     String mJsonString;
@@ -85,130 +86,323 @@ public class SearchActivity extends AppCompatActivity {
         mAdapter = new SearchRecyclerAdapter(getApplicationContext(), mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-        addItem("은행1","뫄뫄아이템1",0.01F);
-        addItem("은행2","뫄뫄2",0.2F);
-        addItem("은행3","뫄뫄아이템5",0.03F);
-        addItem("은행4","뫄뫄4",0.4F);
+        //addItem("은행1","뫄뫄아이템1",0.01F);
+        //addItem("은행2","뫄뫄2",0.2F);
+        //addItem("은행3","뫄뫄아이템5",0.03F);
+        //addItem("은행4","뫄뫄4",0.4F);
         Log.d("main","start");
 
         //리사이클러 뷰 클릭 이벤트 : 상세 페이지  이동
 
 
-        if (searchData.getFinancialSphere().equals("all")){
-            if (searchData.getTarget().equals("all")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname";
+        if (searchData.getFinancialSphere().equals("all")) {
+            if (searchData.getTarget().equals("all")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where calmethod=\"복리\"";
+                    }
                 }
-                else if (searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"정액적립식\"";
-                }
-                else if (searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"자유적립식\"";
+//calmethod
+
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"정액정립식\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
+                } else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"자유적립식\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
+//reservingmethod
 
-            else if (searchData.getTarget().equals("common")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\"";
+            else if (searchData.getTarget().equals("common")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname target=\"서민전용\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and calmethod=\"복리\"";
+                    }
+                } else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and reservingmethod=\"정액정립식\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
+                } else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and reservingmethod=\"자유적립식\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\"and reservingmethod=\"정액적립식\"";
-                }
-                else if(searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"서민전용\"and reservingmethod=\"자유적립식\"";
-                }
-            }
-
-            else if (searchData.getTarget().equals("limit")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"";
-                }
-                else if(searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"and reservingmethod=\"정액적립식\"";
-                }
-                else if(searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"and reservingmethod=\"자유적립식\"";
+            } else if (searchData.getTarget().equals("limit")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and calmethod=\"복리\"";
+                    }
+                } else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and reservingmethod=\"정액정립식\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
+                } else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and reservingmethod=\"자유적립식\"";
+                    } else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    } else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where target=\"일부제한\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
         }
-
-        else if (searchData.getFinancialSphere().equals("first")){
-            if (searchData.getTarget().equals("all")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"";
+//target
+        else if (searchData.getFinancialSphere().equals("first")) {
+            if (searchData.getTarget().equals("all")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and calmethod=\"복리\"";
+                    }
                 }
-                else if (searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and reservingmethod=\"정액적립식\"";
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and reservingmethod=\"정액정립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
                 }
-                else if (searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and reservingmethod=\"자유적립식\"";
+                else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and reservingmethod=\"자유적립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
 
-            else if (searchData.getTarget().equals("common")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"서민전용\"";
+            else if (searchData.getTarget().equals("common")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"서민전용\"and reservingmethod=\"정액적립식\"";
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and reservingmethod=\"정액정립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"서민전용\"and reservingmethod=\"자유적립식\"";
+                else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and reservingmethod=\"자유적립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"서민전용\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
 
-            else if (searchData.getTarget().equals("limit")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"일부제한\"";
+            else if (searchData.getTarget().equals("limit")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"일부제한\"and reservingmethod=\"정액적립식\"";
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and reservingmethod=\"정액정립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"은행\"and target=\"일부제한\"and reservingmethod=\"자유적립식\"";
+                else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and reservingmethod=\"자유적립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"은행\" and target=\"일부제한\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
         }
 
         else if (searchData.getFinancialSphere().equals("second")){
-            if (searchData.getTarget().equals("all")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"";
+            if (searchData.getTarget().equals("all")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and calmethod=\"복리\"";
+                    }
                 }
-                else if (searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\" and reservingmethod=\"정액적립식\"";
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and reservingmethod=\"정액정립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
                 }
-                else if (searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\" and reservingmethod=\"자유적립식\"";
+                else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and reservingmethod=\"자유적립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
+                }
+            }
+            else if (searchData.getTarget().equals("common")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and calmethod=\"복리\"";
+                    }
+                }
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and reservingmethod=\"정액정립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
+                }
+                else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and reservingmethod=\"자유적립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"서민전용\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
 
-            else if (searchData.getTarget().equals("common")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"서민전용\"";
+            else if (searchData.getTarget().equals("limit")) {
+                if (searchData.getReservingmethod().equals("all")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"서민전용\"and reservingmethod=\"정액적립식\"";
+                else if (searchData.getReservingmethod().equals("reg")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and reservingmethod=\"정액정립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and reservingmethod=\"정액정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and reservingmethod=\"정액정립식\" and calmethod=\"복리\"";
+                    }
                 }
-                else if(searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"서민전용\"and reservingmethod=\"자유적립식\"";
-                }
-            }
-
-            else if (searchData.getTarget().equals("limit")){
-                if (searchData.getReservingmethod().equals("all")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"일부제한\"";
-                }
-                else if(searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"일부제한\"and reservingmethod=\"정액적립식\"";
-                }
-                else if(searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select b.bankname,s.productname,s.rate from titae.savings as s join titae.bank as b on s.bankname = b.bankname where financialsphere=\"저축은행\"and target=\"일부제한\"and reservingmethod=\"자유적립식\"";
+                else if (searchData.getReservingmethod().equals("rand")) {
+                    if (searchData.getCalmethod().equals("all")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and reservingmethod=\"자유적립식\"";
+                    }
+                    else if (searchData.getCalmethod().equals("simple")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and reservingmethod=\"자유정립식\" and calmethod=\"단리\"";
+                    }
+                    else if (searchData.getCalmethod().equals("compound")) {
+                        sql_msg = "sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where bank=\"저축은행\" and target=\"일부제한\" and reservingmethod=\"자유정립식\" and calmethod=\"복리\"";
+                    }
                 }
             }
         }
 
-        String myIP = "192.168.56.1";
+        String myIP = "172.30.1.7";
         getData asyncgetData = new getData();
         asyncgetData.execute("http://"+myIP+"/getjson.php" ); //onPreExecute -> doInBackground -> onPostExecute 순으로 실행됨 본인 아이피주소 넣으면됨
         Log.d("main","start3");
@@ -252,6 +446,7 @@ public class SearchActivity extends AppCompatActivity {
                 String productname = c.getString(TAG_Productname);
                 float rate = Float.parseFloat(c.getString(TAG_Rate));
                 String description = c.getString(TAG_Description);
+                String calmethod = c.getString(TAG_Calmethod);
                 Log.d("makelist",description);
                 addItem(bankname,productname,rate);
 
@@ -325,8 +520,5 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-
 }
-
-
 
