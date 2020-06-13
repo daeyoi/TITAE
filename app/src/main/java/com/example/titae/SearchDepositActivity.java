@@ -1,17 +1,9 @@
 package com.example.titae;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,18 +11,19 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Dictionary;
 
-public class SearchActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class SearchDepositActivity extends AppCompatActivity {
     RecyclerView mRecyclerView = null ;
     SearchRecyclerAdapter mAdapter = null ;
     ArrayList<SearchRecyclerItem> mList = new ArrayList<SearchRecyclerItem>();
@@ -52,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_search_deposit);
         Log.d("main","start1");
         Intent intent = getIntent();
         SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
@@ -71,7 +64,7 @@ public class SearchActivity extends AppCompatActivity {
 
         tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
         tv2.setText("가입대상: " + searchData.getTarget() + "  ");
-        tv3.setText("적립방식: " + searchData.getReservingmethod() + "  ");
+        tv3.setText("적립방식: " + searchData.getCalmethod() + "  ");
         tv4.setText("지역: " + searchData.getRegion() + "  ");
         tv5.setText("적립금액: " + searchData.getAmount() + "  ");
         tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
@@ -85,6 +78,8 @@ public class SearchActivity extends AppCompatActivity {
         mAdapter = new SearchRecyclerAdapter(getApplicationContext(), mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
+
+        //임시
         addItem("은행1","뫄뫄아이템1",0.01F);
         addItem("은행2","뫄뫄2",0.2F);
         addItem("은행3","뫄뫄아이템5",0.03F);
@@ -96,14 +91,14 @@ public class SearchActivity extends AppCompatActivity {
 
         if (searchData.getFinancialSphere().equals("all")){
             if (searchData.getTarget().equals("all")){
-                if (searchData.getReservingmethod().equals("all")){
+                if (searchData.getCalmethod().equals("all")){
                     sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname";
                 }
-                else if (searchData.getReservingmethod().equals("reg")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"정액적립식\"";
+                else if (searchData.getCalmethod().equals("simple")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"단리\"";
                 }
-                else if (searchData.getReservingmethod().equals("rand")){
-                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"자유적립식\"";
+                else if (searchData.getCalmethod().equals("compound")){
+                    sql_msg="sql_msg=select * from titae.savings as s join titae.bank as b on s.bankname = b.bankname where reservingmethod=\"복리\"";
                 }
             }
 
@@ -220,13 +215,16 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "button click (return Search2Act)", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(SearchActivity.this, Search2Activity.class);
+                Intent intent = new Intent(SearchDepositActivity.this, Search2DepositActivity.class);
 
                 startActivity(intent);
                 finish();
             }
         });
+
     }
+
+
 
 
     public void addItem(String bankName, String productName, float rate) {

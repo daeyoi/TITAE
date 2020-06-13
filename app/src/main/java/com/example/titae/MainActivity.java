@@ -70,6 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.show();
 
+        //예금 버튼 처리
+        deposit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "button click (to Search2Act)", Toast.LENGTH_LONG).show();
+                Intent myintent = new Intent(MainActivity.this, Search2DepositActivity.class);
+                startActivity(myintent);
+//                finish();
+            }
+        });
+
+        dialog.show();
     }
 
     void select_compare_popup() {
@@ -92,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        deposit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "button click (to CompareAct)", Toast.LENGTH_LONG).show();
+                Intent myintent = new Intent(MainActivity.this, CompareActivity.class);
+                startActivity(myintent);
+//                finish();
+            }
+        });
         dialog.show();
 
     }

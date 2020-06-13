@@ -1,16 +1,14 @@
 package com.example.titae;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultDepositActivity extends AppCompatActivity {
 
     TextView bank;
     TextView product;
@@ -27,13 +25,17 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_result_deposit);
         mData = new SearchRecyclerItem();
         Intent intent = getIntent();
-        mData = (SearchRecyclerItem) intent.getSerializableExtra("SEARCH_ITEM");
-
         mData.setBankName(intent.getStringExtra("bank_name"));
+////        mData.setFinancialSphere(intent.getStringExtra("financial_sphere"));
+////        mData.setRate((Float)intent.getFloatExtra("rate", 0.0f));
+////        mData.setRegion(intent.getStringExtra("region"));
         mData.setProductName(intent.getStringExtra("product_name"));
+//        mData.setTarget(intent.getStringExtra("target"));
+//        mData.setReservingmethod(intent.getStringExtra("reserving_method"));
+//        mData.setCalMethod(intent.getStringExtra("cal_method"));
 
 
         SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_RECYCLER_ADAPTER");

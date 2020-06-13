@@ -3,7 +3,9 @@ package com.example.titae;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 
-public class SearchRecyclerItem {
+import java.io.Serializable;
+
+public class SearchRecyclerItem implements Serializable {
 
     //Bank 테이블
     private String bankName;

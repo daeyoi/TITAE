@@ -10,7 +10,8 @@ import java.io.Serializable;
 public class SearchData implements Serializable {
     public String financialSphere;
     public String target;
-    public String reservingmethod;  //적립 방식
+    public String reservingmethod;  //정액, 자유적립
+    public String calmethod;        //단리, 복리
     public String region;
     public int amount;
     public int period;
@@ -25,6 +26,10 @@ public class SearchData implements Serializable {
 
     public void setReservingmethod(String reservingmethod) {
         this.reservingmethod = reservingmethod;
+    }
+
+    public void setCalmethod(String calmethod) {
+        this.calmethod = calmethod;
     }
 
     public void setRegion(String region) {
@@ -49,6 +54,10 @@ public class SearchData implements Serializable {
 
     public String getReservingmethod() {
         return reservingmethod;
+    }
+
+    public String getCalmethod() {
+        return calmethod;
     }
 
     public String getRegion() {

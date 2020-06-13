@@ -80,15 +80,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
                         Intent intent = new Intent(view.getContext(), ResultActivity.class);
 
                         //클릭위치 아이템 삽임
-                        intent.putExtra("bank_name",item.getBankName());
-//                        intent.putExtra("financial_sphere",mData.get(pos).getFinancialSphere());
-//                        intent.putExtra("rate",mData.get(pos).getRate());
-//                        intent.putExtra("region",mData.get(pos).getRegion());
-                        intent.putExtra("product_name",item.getProductName());
-//                        intent.putExtra("target",mData.get(pos).getTarget());
-//                        intent.putExtra("reserving_method",mData.get(pos).getReservingmethod());
-//                        intent.putExtra("cal_method",mData.get(pos).getCalMethod());
-
+                        intent.putExtra("SEARCH_ITEM", item);
 
                         view.getContext().startActivity(intent);
 //                        notifyItemChanged(pos);
