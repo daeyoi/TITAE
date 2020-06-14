@@ -1,6 +1,8 @@
 package com.example.titae;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,29 +62,6 @@ public class CompareActivity extends AppCompatActivity implements OnItemClick {
         setContentView(R.layout.activity_compare);
         Log.d("compare","start1");
 
-
-//        Intent intent = getIntent();
-//        SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
-//        if(searchData == null)
-//        {
-//            Toast.makeText(getApplicationContext(), "Tq", Toast.LENGTH_LONG).show();
-//        }
-
-//        TextView tv1 = (TextView)findViewById(R.id.tv1);
-//        TextView tv2 = (TextView)findViewById(R.id.tv2);
-//        TextView tv3 = (TextView)findViewById(R.id.tv3);
-//        TextView tv4 = (TextView)findViewById(R.id.tv4);
-//        TextView tv5 = (TextView)findViewById(R.id.tv5);
-//        TextView tv6 = (TextView)findViewById(R.id.tv6);
-//
-//        tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
-//        tv2.setText("가입대상: " + searchData.getTarget() + "  ");
-//        tv3.setText("적립방식: " + searchData.getCalMethod() + "  ");
-//        tv4.setText("지역: " + searchData.getRegion() + "  ");
-//        tv5.setText("적립금액: " + searchData.getAmount() + "  ");
-//        tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
-
-
         //정의
         btn_6 = (Button) findViewById(R.id.button_6);
         btn_12 = (Button) findViewById(R.id.button_12);
@@ -108,9 +87,23 @@ public class CompareActivity extends AppCompatActivity implements OnItemClick {
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
 
+        //구분선 추가
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(mRecyclerView.getContext(),new LinearLayoutManager(this).getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
+
+        //swipe 구현
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
         addItem("임시1","임시 메뉴", 1.0F);
         addItem("임시2","임시 메뉴", 2.9F);
         addItem("임시3","임시 메뉴", 3.5F);
+        addItem("임시4","임시 메뉴", 3.5F);
+        addItem("임시5","임시 메뉴", 3.5F);
+        addItem("임시6","임시 메뉴", 3.5F);
+        addItem("임시7","임시 메뉴", 3.5F);
 
         Log.d("main","start");
 
@@ -310,6 +303,25 @@ public class CompareActivity extends AppCompatActivity implements OnItemClick {
         // value this data you receive when increment() / decrement() called
         return amount_data;
     }
+
+    //recyclerview swipe 구현
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            // remove item from adapter
+            final int position = viewHolder.getAdapterPosition();
+            mList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        }
+
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+    };
 
 }
 

@@ -15,7 +15,8 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="월 저축금액" />
+            android:text="월 저축금액"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/amount"
@@ -24,13 +25,16 @@
             android:ems="10"
             android:maxLength="25"
             android:inputType="number"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            android:gravity="right"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="이자" />
+            android:text="이자"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/interest"
@@ -38,111 +42,127 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="numberDecimal"
-            android:selectAllOnFocus="true"  />
+            android:selectAllOnFocus="true"
+            android:gravity="right"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저축기간" />
+            android:text="저축기간"
+            android:layout_marginBottom="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
 
             <Button
                 android:id="@+id/button_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6개월" />
+                android:text="6개월"
+                android:background="@drawable/select_button_reverse"/>
 
             <Button
                 android:id="@+id/button_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="12개월" />
+                android:text="12개월"
+                android:background="@drawable/select_button_reverse"/>
 
             <Button
                 android:id="@+id/button_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="24개월" />
+                android:text="24개월"
+                android:background="@drawable/select_button_reverse"/>
 
             <Button
                 android:id="@+id/button_36"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="36개월" />
+                android:text="36개월"
+                android:background="@drawable/select_button_reverse"/>
 
         </LinearLayout>
         <TextView
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저축 방식" />
+            android:text="저축 방식"
+            android:layout_marginBottom="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
 
             <Button
                 android:id="@+id/btn_simple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="단리" />
+                android:text="단리"
+                android:background="@drawable/select_button_reverse"/>
 
             <Button
                 android:id="@+id/btn_compound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="복리" />
+                android:text="복리"
+                android:background="@drawable/select_button_reverse"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="실수령액" />
+                android:text="실수령액"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/received_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:text="" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="이자" />
+                android:text="이자"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/interest_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:text="" />
         </LinearLayout>
 
@@ -150,6 +170,7 @@
             android:id="@+id/calc_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="계산" />
+            android:text="계산"
+            android:background="@drawable/select_button_reverse"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@
     <resources>
         <string-array name="region">
 
+            <item>전체</item>
             <item>서울</item>
             <item>경기</item>
             <item>충청</item>

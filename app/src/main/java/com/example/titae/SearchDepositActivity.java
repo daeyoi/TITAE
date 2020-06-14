@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,23 +56,6 @@ public class SearchDepositActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "intent error", Toast.LENGTH_LONG).show();
         }
 
-        //잘 넘어왔는지 확인용 (임시)
-        TextView tv1 = (TextView)findViewById(R.id.tv1);
-        TextView tv2 = (TextView)findViewById(R.id.tv2);
-        TextView tv3 = (TextView)findViewById(R.id.tv3);
-        TextView tv4 = (TextView)findViewById(R.id.tv4);
-        TextView tv5 = (TextView)findViewById(R.id.tv5);
-        TextView tv6 = (TextView)findViewById(R.id.tv6);
-
-        tv1.setText("금융권역: " + searchData.getFinancialSphere() + "  ");
-        tv2.setText("가입대상: " + searchData.getTarget() + "  ");
-        tv3.setText("적립방식: " + searchData.getCalmethod() + "  ");
-        tv4.setText("지역: " + searchData.getRegion() + "  ");
-        tv5.setText("적립금액: " + searchData.getAmount() + "  ");
-        tv6.setText("저축기간: " + searchData.getPeriod() + "  ");
-
-
-
         mRecyclerView = findViewById(R.id.search_list) ;
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
@@ -79,6 +63,11 @@ public class SearchDepositActivity extends AppCompatActivity {
         mAdapter = new SearchRecyclerAdapter(getApplicationContext(), mList) ;
         mRecyclerView.setAdapter(mAdapter) ;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
+
+        //구분선 추가
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(mRecyclerView.getContext(),new LinearLayoutManager(this).getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         //임시
         //addItem("은행1","뫄뫄아이템1",0.01F);

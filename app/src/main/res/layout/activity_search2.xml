@@ -39,15 +39,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
-                android:text="전체" />
+                android:background="@drawable/select_button_reverse"
+                android:checked="false"
+                android:text="전체"
+                />
 
             <Button
                 android:id="@+id/bank_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="은행" />
 
             <Button
@@ -55,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="저축은행" />
 
         </LinearLayout>
@@ -76,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="제한없음" />
 
             <Button
@@ -84,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="서민전용" />
 
             <Button
@@ -92,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="일부제한" />
         </LinearLayout>
 
@@ -112,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="전체" />
 
             <Button
@@ -120,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="정액적립식" />
 
             <Button
@@ -128,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#d6d7d7"
+                android:background="@drawable/select_button_reverse"
                 android:text="자유적립식" />
         </LinearLayout>
 
@@ -148,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="전체" />
 
             <Button
@@ -156,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#D6D7D7"
+                android:background="@drawable/select_button_reverse"
                 android:text="단리" />
 
             <Button
@@ -164,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#d6d7d7"
+                android:background="@drawable/select_button_reverse"
                 android:text="복리" />
         </LinearLayout>
 
@@ -215,6 +217,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
+                android:gravity="right"
                 android:text="0" />
 
 
@@ -232,8 +235,8 @@
             android:id="@+id/submission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/select_button_reverse"
             android:text="검색" />
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

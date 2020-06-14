@@ -59,11 +59,11 @@ public class Search2DepositActivity extends AppCompatActivity {
         Initialize searchDate
          */
         searchData.setFinancialSphere("all");
-        ba_btn.setBackgroundColor(0x969797);
+//        ba_btn.setBackgroundColor(0x969797);
         searchData.setTarget("all");
-        ta_btn.setBackgroundColor(0x969797);
+//        ta_btn.setBackgroundColor(0x969797);
         searchData.setCalmethod("all");
-        ca_btn.setBackgroundColor(0x969797);
+//        ca_btn.setBackgroundColor(0x969797);
         searchData.setAmount(0);
 
         //수정해야하는 부분
@@ -77,13 +77,51 @@ public class Search2DepositActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 if(position == 0)
                 {
-                    //서울 일 때 경우
-                    searchData.setRegion("서울");
+                    searchData.setRegion("전체");
                 }
                 else if(position ==1)
                 {
-                    //경기일때
+                    searchData.setRegion("서울");
+                }
+                else if(position ==2)
+                {
                     searchData.setRegion("경기");
+                }
+                else if(position ==3)
+                {
+                    searchData.setRegion("충청");
+                }
+                else if(position ==4)
+                {
+                    searchData.setRegion("전라");
+                }
+                else if(position ==5)
+                {
+                    searchData.setRegion("경상");
+                }
+                else if(position ==6)
+                {
+                    searchData.setRegion("인천");
+                }
+                else if(position ==7)
+                {
+                    searchData.setRegion("부산");
+                }
+                else if(position ==8)
+                {
+                    searchData.setRegion("대구");
+                }
+                else if(position ==9)
+                {
+                    searchData.setRegion("울산");
+                }
+                else if(position ==10)
+                {
+                    searchData.setRegion("대전");
+                }
+                else if(position ==11)
+                {
+                    searchData.setRegion("제주");
                 }
                 //기타 등등 처리
             }
@@ -108,6 +146,9 @@ public class Search2DepositActivity extends AppCompatActivity {
         tc_btn.setOnClickListener(btnOnClickListner);
         tl_btn.setOnClickListener(btnOnClickListner);
 
+        ca_btn.setOnClickListener(btnOnClickListner);
+        cc_btn.setOnClickListener(btnOnClickListner);
+        cs_btn.setOnClickListener(btnOnClickListner);
 
         /*
         SearchActivity로 이동
@@ -134,59 +175,59 @@ public class Search2DepositActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.bank_all:
                     searchData.setFinancialSphere("all");
-                    ba_btn.setBackgroundColor(0x969797);
-                    bf_btn.setBackgroundColor(0xd6d7d7);
-                    bs_btn.setBackgroundColor(0xd6d7d7);
+//                    ba_btn.setBackgroundColor(0x969797);
+//                    bf_btn.setBackgroundColor(0xd6d7d7);
+//                    bs_btn.setBackgroundColor(0xd6d7d7);
                     break;
                 case R.id.bank_first:
                     searchData.setFinancialSphere("first");
-                    bf_btn.setBackgroundColor(0x969797);
-                    ba_btn.setBackgroundColor(0xd6d7d7);
-                    bs_btn.setBackgroundColor(0xd6d7d7);
+//                    bf_btn.setBackgroundColor(0x969797);
+//                    ba_btn.setBackgroundColor(0xd6d7d7);
+//                    bs_btn.setBackgroundColor(0xd6d7d7);
                     break;
                 case R.id.bank_second:
                     searchData.setFinancialSphere("second");
-                    bs_btn.setBackgroundColor(0x969797);
-                    bf_btn.setBackgroundColor(0xd6d7d7);
-                    ba_btn.setBackgroundColor(0xd6d7d7);
+//                    bs_btn.setBackgroundColor(0x969797);
+//                    bf_btn.setBackgroundColor(0xd6d7d7);
+//                    ba_btn.setBackgroundColor(0xd6d7d7);
                     break;
 
                 case R.id.target_all:
                     searchData.setTarget("all");
-                    ta_btn.setBackgroundColor(0x969797);
-                    tc_btn.setBackgroundColor(0xd6d7d7);
-                    tl_btn.setBackgroundColor(0xd6d7d7);
+//                    ta_btn.setBackgroundColor(0x969797);
+//                    tc_btn.setBackgroundColor(0xd6d7d7);
+//                    tl_btn.setBackgroundColor(0xd6d7d7);
                     break;
                 case R.id.target_common:
                     searchData.setTarget("common");
-                    tc_btn.setBackgroundColor(0x969797);
-                    ta_btn.setBackgroundColor(0xd6d7d7);
-                    tl_btn.setBackgroundColor(0xd6d7d7);
+//                    tc_btn.setBackgroundColor(0x969797);
+//                    ta_btn.setBackgroundColor(0xd6d7d7);
+//                    tl_btn.setBackgroundColor(0xd6d7d7);
                     break;
                 case R.id.target_limit:
                     searchData.setTarget("limit");
-                    tl_btn.setBackgroundColor(0x969797);
-                    tc_btn.setBackgroundColor(0xd6d7d7);
-                    ta_btn.setBackgroundColor(0xd6d7d7);
+//                    tl_btn.setBackgroundColor(0x969797);
+//                    tc_btn.setBackgroundColor(0xd6d7d7);
+//                    ta_btn.setBackgroundColor(0xd6d7d7);
                     break;
 
                 case R.id.calmethod_all:
                     searchData.setCalmethod("all");
-                    ca_btn.setBackgroundColor(0x969797);
-                    cs_btn.setBackgroundColor(0xd6d7d7);
-                    cc_btn.setBackgroundColor(0xd6d7d7);
+//                    ca_btn.setBackgroundColor(0x969797);
+//                    cs_btn.setBackgroundColor(0xd6d7d7);
+//                    cc_btn.setBackgroundColor(0xd6d7d7);
                     break;
                 case R.id.calmethod_simple:
                     searchData.setCalmethod("simple");
-                    cc_btn.setBackgroundColor(0x969797);
-                    ca_btn.setBackgroundColor(0xd6d7d7);
-                    cs_btn.setBackgroundColor(0xd6d7d7);
+//                    cc_btn.setBackgroundColor(0x969797);
+//                    ca_btn.setBackgroundColor(0xd6d7d7);
+//                    cs_btn.setBackgroundColor(0xd6d7d7);
                     break;
                 case R.id.calmethod_compound:
                     searchData.setCalmethod("compound");
-                    cc_btn.setBackgroundColor(0x969797);
-                    cs_btn.setBackgroundColor(0xd6d7d7);
-                    ca_btn.setBackgroundColor(0xd6d7d7);
+//                    cc_btn.setBackgroundColor(0x969797);
+//                    cs_btn.setBackgroundColor(0xd6d7d7);
+//                    ca_btn.setBackgroundColor(0xd6d7d7);
                     break;
 
             }
