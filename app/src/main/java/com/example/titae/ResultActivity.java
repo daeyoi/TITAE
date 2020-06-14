@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -90,7 +92,7 @@ public class ResultActivity extends AppCompatActivity {
         interest = (TextView) findViewById(R.id.interest_result_output);
         etc = (TextView) findViewById(R.id.etc_result);
         btn_home = (Button) findViewById(R.id.btn_hompage);
-
+/*
         searchKeyword1 = mData.getBankName();
         searchKeyword2 = mData.getProductName();
 
@@ -98,9 +100,16 @@ public class ResultActivity extends AppCompatActivity {
         task.execute(searchKeyword1, searchKeyword2);
 
         mArrayList = new ArrayList<>();
-
+*/
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://obank.kbstar.com/quics?page=C020702&cc=b061761:b061770&isNew=N&prcode=DP000942"));
+                startActivity(intent);
+            }
+        });
     }
-
+/*
     private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
@@ -248,6 +257,6 @@ public class ResultActivity extends AppCompatActivity {
         }
 
     }
-
+*/
 
 }

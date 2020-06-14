@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResultActivity">
+    tools:context=".ResultActivity"
+    android:background="@drawable/titae_gradient">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -21,164 +22,202 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="세부 결과" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_layout">
             <TextView
-                android:id="@+id/bank_name_result"
-                android:layout_width="wrap_content"
+                android:id="@+id/result"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="금융회사" />
+                android:textSize="32dp"
+                android:layout_marginLeft="30dp"
+                android:text="세부 결과" />
 
-            <TextView
-                android:id="@+id/bank_name_result_output"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/bank_name_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="금융회사"
+                    android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:id="@+id/product_name_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="상품명" />
+                <TextView
+                    android:id="@+id/bank_name_result_output"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="국민은행" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/product_name_result_output"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/rate_result"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="이자율" />
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
-            <TextView
-                android:id="@+id/rate_result_output"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/product_name_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="상품명"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/product_name_result_output"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="KB맑은하늘적금" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/rate_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="이자율"
+                    android:layout_marginLeft="10dp"/>
 
-            <TextView
-                android:id="@+id/target_result"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/rate_result_output"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1.95%" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="가입대상" />
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
-            <TextView
-                android:id="@+id/target_result_output"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/target_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="가입대상"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/target_result_output"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="제한 없음" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/reserving_method_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="적립방식"
+                    android:layout_marginLeft="10dp"/>
 
-            <TextView
-                android:id="@+id/reserving_method_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="적립방식" />
+                <TextView
+                    android:id="@+id/reserving_method_result_output"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="자유적립식" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/reserving_method_result_output"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginBottom="5dp">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<!--                <TextView-->
+<!--                    android:id="@+id/received_amount_result"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="실수령액"-->
+<!--                    android:layout_marginLeft="10dp"/>-->
 
-            <TextView
-                android:id="@+id/received_amount_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="실수령액" />
+<!--                <TextView-->
+<!--                    android:id="@+id/received_amount_result_output"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="TextView" />-->
+<!--&lt;!&ndash;            </LinearLayout>&ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginBottom="5dp">-->
 
-            <TextView
-                android:id="@+id/received_amount_result_output"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/interest_result"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="이자"-->
+<!--                    android:layout_marginLeft="10dp"/>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<!--                <TextView-->
+<!--                    android:id="@+id/interest_result_output"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="TextView" />-->
+<!--            </LinearLayout>-->
 
-            <TextView
-                android:id="@+id/interest_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="이자" />
-
-            <TextView
-                android:id="@+id/interest_result_output"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/etc_result"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="이곳은 기타 상세 정보 뜨는 란" />
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border_layout"
+            android:text="상품특징 \n 맑은하늘을 위한 생활 속 작은 실천에 대해 우대금리를 제공하고, 대중교통/자전거상해 관련 무료 보험서비스(최대 2억원 보장)를 제공하는 친환경 특화 상품\n세제혜택\n비과세종합저축으로 가입 가능
+※ 관련 세법이 개정될 경우 세율이 변경되거나 세금이 부과될 수 있음
+※ 계약기간 만료일 이후의 이자는 과세됨
+" />
 
         <Button
             android:id="@+id/btn_hompage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="홈페이지 바로가기" />
+            android:text="홈페이지 바로가기"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/select_button"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

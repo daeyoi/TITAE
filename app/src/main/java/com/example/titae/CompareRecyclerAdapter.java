@@ -1,6 +1,7 @@
 package com.example.titae;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,8 @@ public class CompareRecyclerAdapter extends RecyclerView.Adapter<CompareRecycler
                         if (TextUtils.equals(type, "calc_amount")) { //payload 값 출력
                             period = mCallback.getPeriod();
                             amount_data = mCallback.getAmount();
-                            holder.ret_amount.setText(String.valueOf(amount_data * item.getRate() / 100 * period)  + (period * amount_data));
+
+                            holder.ret_amount.setText(String.valueOf((amount_data * item.getRate() / 100 * period)  + (period * amount_data)));
                         }
                 }
             }
@@ -100,7 +102,7 @@ public class CompareRecyclerAdapter extends RecyclerView.Adapter<CompareRecycler
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView bankName ;
+        TextView bankName;
         TextView productName ;
         TextView rate ;
         TextView ret_amount;
@@ -115,15 +117,22 @@ public class CompareRecyclerAdapter extends RecyclerView.Adapter<CompareRecycler
             ret_amount = itemView.findViewById(R.id.received_amount_result_compare);
 
             //클릭 이벤트 처리
-            itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Context context = view.getContext();
                     //현재 아이템의 위치를 받아 옴
                     int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION)
-                    {
+                    if (pos != RecyclerView.NO_POSITION) {
                         //데이터 리스트로부터 아이템 데이터 참조
                         SearchRecyclerItem item = mData.get(pos);
+                        Intent intent = new Intent(view.getContext(), ResultActivity.class);
+
+                        //클릭위치 아이템 삽임
+                        intent.putExtra("SEARCH_ITEM", item);
+
+                        view.getContext().startActivity(intent);
+//                        notifyItemChanged(pos);
                     }
                 }
             });
