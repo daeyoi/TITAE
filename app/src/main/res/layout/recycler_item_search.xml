@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bank_name"
-        android:textSize="24dp"
-        android:textColor="#000000"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/product_name"
-        android:text="ㅁ은행" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_name"
-        android:textSize="24dp"
-        android:textColor="#000000"
-        app:layout_constraintLeft_toRightOf="@id/bank_name"
-        app:layout_constraintRight_toRightOf="@id/interest_rate"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="ㅇ상품" />
+        <TextView
+            android:id="@+id/bank_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ㅁ은행"
+            android:textColor="#000000"
+            android:textSize="24dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/interest_rate"
-        android:textSize="24dp"
-        android:textColor="#000000"
-        app:layout_constraintLeft_toRightOf="@id/product_name"
-        app:layout_constraintRight_toRightOf="@id/favorites"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="0.00%" />
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ㅇ상품"
+            android:textColor="#000000"
+            android:textSize="24dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/favorites"
-        app:layout_constraintLeft_toRightOf="@id/interest_rate"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="추가"/>
+        <TextView
+            android:id="@+id/interest_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00%"
+            android:textColor="#000000"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추가" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

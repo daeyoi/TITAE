@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:maxLength="25"
-            android:inputType="number" />
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
 
         <TextView
             android:id="@+id/textView6"
@@ -36,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"  />
 
         <TextView
             android:id="@+id/textView2"
@@ -143,7 +145,6 @@
                 android:layout_weight="1"
                 android:text="" />
         </LinearLayout>
-
 
         <Button
             android:id="@+id/calc_btn"

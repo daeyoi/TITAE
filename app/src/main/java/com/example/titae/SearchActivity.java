@@ -55,6 +55,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Log.d("main","start1");
+
+        //검색 정보 intent 받아오기
         Intent intent = getIntent();
         SearchData searchData = (SearchData)intent.getSerializableExtra("SEARCH_DATA");
         if(searchData == null)
@@ -80,16 +82,19 @@ public class SearchActivity extends AppCompatActivity {
 
 
         mRecyclerView = findViewById(R.id.search_list) ;
+//        SearchRecyclerDecoration spaceDecoration = new SearchRecyclerDecoration(1);
+//        mRecyclerView.addItemDecoration(spaceDecoration);
+
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
 
         mAdapter = new SearchRecyclerAdapter(getApplicationContext(), mList) ;
+        addItem("은행1","뫄뫄아이템1",0.01F);
+        addItem("은행2","뫄뫄2",0.2F);
+        addItem("은행3","뫄뫄아이템5",0.03F);
+        addItem("은행4","뫄뫄4",0.4F);
         mRecyclerView.setAdapter(mAdapter) ;
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
-        //addItem("은행1","뫄뫄아이템1",0.01F);
-        //addItem("은행2","뫄뫄2",0.2F);
-        //addItem("은행3","뫄뫄아이템5",0.03F);
-        //addItem("은행4","뫄뫄4",0.4F);
         Log.d("main","start");
 
         //리사이클러 뷰 클릭 이벤트 : 상세 페이지  이동

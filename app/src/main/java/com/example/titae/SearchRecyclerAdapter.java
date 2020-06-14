@@ -3,6 +3,7 @@ package com.example.titae;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder> {
@@ -39,11 +42,13 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     @Override
     public void onBindViewHolder(SearchRecyclerAdapter.ViewHolder holder, int position) {
 
+        //아이템 값 입력
         SearchRecyclerItem item = mData.get(position);
 
         holder.bankName.setText(item.getBankName());
         holder.productName.setText(item.getProductName());
         holder.rate.setText("" + item.getRate() + "%");
+
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

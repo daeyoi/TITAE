@@ -23,10 +23,10 @@ public class CalcActivity extends AppCompatActivity {
 
     EditText amount;
     EditText interest;
+
     int period;
     int calmethod;
     int amount_data;
-
     float interest_data;
 
     TextView rec_amount;
@@ -58,8 +58,11 @@ public class CalcActivity extends AppCompatActivity {
         btn_sim.setBackgroundColor(0x969797);
         period = 6;
         calmethod = 0;
-        amount_data = 0;
-        interest_data = 0;
+        amount_data = 300000;
+        interest_data = 1.5F;
+
+        amount.setText(String.valueOf(amount_data));
+        interest.setText(String.valueOf(interest_data));
 
         //버튼 액션
         CalcActivity.BtnOnClickListner btnOnClickListner = new CalcActivity.BtnOnClickListner();
@@ -74,7 +77,6 @@ public class CalcActivity extends AppCompatActivity {
         //실시간 값 대입
         amount.addTextChangedListener(textWatcher);
         interest.addTextChangedListener(textWatcher_interest);
-
     }
 
     /*
@@ -126,12 +128,12 @@ public class CalcActivity extends AppCompatActivity {
                 case R.id.calc_btn:
                     if (calmethod == 0) {
                         Toast.makeText(getApplicationContext(), "눌리임" + interest_data + " " + amount_data + " " + period + " " + calmethod, Toast.LENGTH_LONG).show();
-                        rec_amount.setText(String.valueOf((amount_data * interest_data * period) / 100 + (period * amount_data)));
-                        interest_result.setText(String.valueOf((amount_data * interest_data * period)/ 100));
+                        rec_amount.setText(String.valueOf((amount_data * interest_data / 100 * period)  + (period * amount_data)));
+                        interest_result.setText(String.valueOf((amount_data * interest_data / 100 * period)));
                     } else if (calmethod == 1) {
                         Toast.makeText(getApplicationContext(), "눌리임" + interest_data + " " + amount_data + " " + period + " " + calmethod, Toast.LENGTH_LONG).show();
-                        rec_amount.setText(String.valueOf( Math.pow((amount_data * period) * (1 + interest_data), period / 12)));
-                        interest_result.setText(String.valueOf(Math.pow((amount_data * period) * (1 + interest_data), period / 12) - (period * amount_data)));
+                        rec_amount.setText(String.valueOf( (amount_data * period) * Math.pow((1 + interest_data * 0.01), period / 12)));
+                        interest_result.setText(String.valueOf((amount_data * period) * Math.pow((1 + interest_data * 0.01), period / 12) - (period * amount_data)));
                     }
                     break;
             }
