@@ -30,13 +30,15 @@ def get_info (user_info) :
     productname = driver.find_elements_by_xpath("//div[@class='area1']/a")
     description = driver.find_elements_by_xpath("//span[@class='msg']")
     Record_delete.delete(table_deposit,bankname,user_info) #해당 은행 데이터 초기화
-    product = Product.Product(bankname,None,None,None,None,None,None) #기초
+    product = Product.Product(bankname,None,None,None,None,None,None) #초기화
 #예금
     for i in range(0,cnt) :
         productname = driver.find_elements_by_xpath("//div[@class='area1']/a")
         description = driver.find_elements_by_xpath("//span[@class='msg']")
-        product.set_description(description[i%10].text)
-        product.set_productname(productname[i%10].text)
+
+        product.set_productname(productname[i%10].text) #상품 이름
+        product.set_description(description[i%10].text) #상품 설명
+        
         wait = WebDriverWait(driver, 10)
         wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'title')))
         
@@ -59,9 +61,9 @@ def get_info (user_info) :
             
        
             
-        product.set_bankname(bankname)
-        product.set_target(target)
-        product.set_calmethod("복리") #임시
+        product.set_bankname(bankname)#은행이름
+        product.set_target(target) #상품 타켓
+        product.set_calmethod("복리") #적립방법
         Record_save.save(table_deposit, bankname, product, user_info)
         
         print(product.get_rate())

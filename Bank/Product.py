@@ -8,6 +8,7 @@ class Product :
         self.calmethod = calmethod
         self.reservingmethod = reservingmethod
 
+
     def get_bankname(self) :
         return self.bankname
     def get_productname(self) :
@@ -22,6 +23,7 @@ class Product :
         return self.calmethod
     def get_reservingmethod(self) :
         return self.reservingmethod
+
 
 
     def set_bankname(self,bankname) :
@@ -44,3 +46,4 @@ class Product :
         
     def set_reservingmethod(self, reservingmethod) :
         self.reservingmethod = reservingmethod
+

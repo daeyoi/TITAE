@@ -1,4 +1,3 @@
-#필수 패키지
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -34,7 +33,7 @@ def get_info (user_info) :
     Record_delete.delete(table_deposit,bankname,user_info) #해당 은행 데이터 초기화
     product = Product.Product(bankname,None,None,None,None,None,None) #기초
 
-    for i in range(13,cnt) :
+    for i in range(14,cnt) :
 
         if "중단" in productname[i].text :
             continue
@@ -84,7 +83,7 @@ def get_info (user_info) :
     Record_delete.delete(table_savings,bankname,user_info) #해당 은행 데이터 초기화
 
     for i in range(0,cnt) :
-       
+        print(i)
 
         if "중단" in productname[i].text :
             continue
@@ -95,7 +94,7 @@ def get_info (user_info) :
         product.set_calmethod("단리") # 임시
 
         driver.find_element_by_partial_link_text(productname[i].text).click()# 상품페이지로 이동
-        
+        print(product.get_productname())
         target = driver.find_elements_by_xpath("//dl[@class='prodcutInfo']/dd")[1].text
         if "제한없음" in target :
             target="제한없음"
@@ -103,14 +102,23 @@ def get_info (user_info) :
             target="서민전용"
         else :
             target="일부제한"
-            
-        rsm = driver.find_elements_by_xpath("//dl[@class='prodcutInfo']/dd")[5].text
-        
-       
 
+        rsm_tmp = driver.find_elements_by_xpath("//dl[@class='prodcutInfo']/dt")
+
+        j_cnt = 0
+        for j in rsm_tmp :
+            if "적립방법" in j.text :
+                rsm = driver.find_elements_by_xpath("//dl[@class='prodcutInfo']/dd")[j_cnt].text
+            j_cnt = j_cnt + 1
+            
+        print(rsm)
         if"자유" in rsm :
             product.set_reservingmethod("자유")
             Record_save.save(table_savings, bankname, product, user_info)
+        elif "매월" in rsm:
+            product.set_reservingmethod("자유")
+            Record_save.save(table_savings, bankname, product, user_info)
+            
         if "정액" in rsm :
             product.set_reservingmethod("정액")
             Record_save.save(table_savings, bankname, product, user_info)
@@ -119,7 +127,7 @@ def get_info (user_info) :
         productname = driver.find_elements_by_xpath("//span[@class='product-tit']/em")
         rate = driver.find_elements_by_xpath("//span[@class='desc-detail']/strong")
         description = driver.find_elements_by_xpath("//span[@class='tit-desc']/a")
-        time.sleep(3)
+        time.sleep(2)
 
 
 
